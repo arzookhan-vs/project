@@ -1,25 +1,69 @@
 <!DOCTYPE html>
+
+{% load static %}
+
 <html>
+  <head>
+    <style>
+      .box {
+        padding: 12px;
+        border: 1px solid #d0d0d0;
+        border-left: 5px solid #d0d0d0;
+        font-style: italic;
+      }
 
-<head>
-	<style>
-		.box {
-			padding: 12px;
-			border: 1px solid #d0d0d0;
-			border-left: 5px solid #d0d0d0;
-			font-style: italic
-		}
-	</style>
-</head>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: fit-content;
+      }
 
-<body>
-	<p><strong>Your Provided Data:</strong></p>
-	<p class='box'>{{ text }}</p>
-	<br>
-	<p><strong>Result:</strong></p>
-	<p class='box'>{{ result }}</p>
-	<br>
-	<p>Best wishes,<br />Demo</p>
-</body>
+      td,
+      th {
+        border: 1px solid #d0d0d0;
+        text-align: center;
+        padding: 10px 20px;
+      }
 
+      th {
+        background-color: #dddddd;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p><strong>Your Provided Data:</strong></p>
+    <div class="box">
+      <table>
+        <tr>
+          <th>Features</th>
+          <th>Values (in cm)</th>
+        </tr>
+        <tr>
+          <td>Sepal Length</td>
+          <td>{{ sepal_length }}</td>
+        </tr>
+        <tr>
+          <td>Sepal Width</td>
+          <td>{{ sepal_width }}</td>
+        </tr>
+        <tr>
+          <td>Petal Length</td>
+          <td>{{ petal_length }}</td>
+        </tr>
+        <tr>
+          <td>Petal Width</td>
+          <td>{{ petal_width }}</td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <p><strong>Prediction Result:</strong></p>
+    <div class="box">
+      <p>Iris - {{ result }}</p>
+      <img src={% static "images/{{ result }}.jpg" %} />
+    </div>
+    <br />
+    <p>Best wishes,<br />Demo</p>
+  </body>
 </html>

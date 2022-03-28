@@ -3,50 +3,75 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils import timezone
-from demoapp.models import Demo
+from demoapp.models import IrisData
 from django.contrib import messages
-
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
-def index (request):
-  submit_form(request)        
+import numpy as np
+from sklearn import preprocessing
+import joblib
+import os
+filePath = os.path.join(os.path.dirname(
+    os.path.realpath(__file__)), 'ml-models/IrisModel.pkl')
+IrisModel = joblib.load(filePath)
+
+def predictIrisFlowerClass(input):
+  input = preprocessing.StandardScaler().fit_transform(input)
+  output = IrisModel.predict(input)
+  return output[0]
+
+def index (request):      
   return render(request, 'index.html')
 
-def submit_form(request):
-  def getResult(text):
-    return 'Your input text was [{}]'.format(text)
-
+def submitData(request):
   if request.method == 'POST':
     emailTo = request.POST.get('email')
-    text = request.POST.get('text')
+    sepalLength = request.POST.get('sepal_length')
+    sepalWidth = request.POST.get('sepal_width')
+    petalLength = request.POST.get('petal_length')
+    petalWidth = request.POST.get('petal_width')
+    
+    isAllFieldFilled = emailTo and sepalLength and sepalWidth and petalLength and petalWidth
 
-    if emailTo and text:
-      results = getResult(text)
-      htmlMessage = render_to_string('emailTemplate.html', {'text': text, 'result': results})
+    if isAllFieldFilled:
+      results = predictIrisFlowerClass(np.array([[sepalLength, sepalWidth, petalLength, petalWidth]]))
+      data = {
+        'sepal_length': sepalLength,
+        'sepal_width': sepalWidth,
+        'petal_length': petalLength,
+        'petal_width': petalWidth,
+        'result': results,
+        'image': "{% static images/" + results + ".jpg %}"
+      }
+      htmlMessage = render_to_string('emailTemplate.html', data)
       textMessage = strip_tags(htmlMessage)
       email = EmailMultiAlternatives(
-          "Here's your result",
+          "Here's the prediction result",
           textMessage,
-          'Demo 📨 <' + settings.EMAIL_HOST_USER + '>',
+          'IrisData 📨 <' + settings.EMAIL_HOST_USER + '>',
           [emailTo]
       )
       email.attach_alternative(htmlMessage, 'text/html')
       
-      demo = Demo(
+      irisData = IrisData(
           email=emailTo,
-          text=text,
-          result=results,
+          sepal_length=sepalLength,
+          sepal_width=sepalWidth,
+          petal_length=petalLength,
+          petal_width=petalWidth,
+          prediction_result=results,
           date=timezone.now()
       )
       
-      demo.save()
+      irisData.save()
       email.send()
       
       messages.success(request, 'Submitted successfully!')
       
     else:
       messages.warning(request, 'Please fill all fields!')
-
-    return HttpResponseRedirect(reverse('demo'))
+  
+  return HttpResponseRedirect(reverse('home'))
+  # return render(request, 'emailTemplate.html', data)

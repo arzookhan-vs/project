@@ -138,9 +138,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Added manually
-STATIC_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-    # '/var/www/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
 ]
 
 EMAIL_HOST = 'smtp.gmail.com'
