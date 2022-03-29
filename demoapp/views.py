@@ -10,7 +10,6 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
 import numpy as np
-from sklearn import preprocessing
 import joblib
 import os
 filePath = os.path.join(os.path.dirname(

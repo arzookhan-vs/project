@@ -7,7 +7,6 @@
     <style>
       .box {
         padding: 12px;
-        border: 1px solid #d0d0d0;
         border-left: 5px solid #d0d0d0;
         font-style: italic;
       }
@@ -59,10 +58,7 @@
     </div>
     <br />
     <p><strong>Prediction Result:</strong></p>
-    <div class="box">
-      <p>{{ result }}</p>
-      {% comment %} <img src={% static "images/{{ result }}.jpg" %} /> {% endcomment %}
-    </div>
+    <p class="box">{{ result }}</p>
     <br />
     <p>Best wishes,<br />Demo</p>
   </body>
