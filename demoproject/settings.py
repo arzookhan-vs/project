@@ -37,8 +37,8 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['IrisDataClassificationMLModel.azurewebsites.net']
-CSRF_TRUSTED_ORIGINS = ['https://IrisDataClassificationMLModel.azurewebsites.net']
+ALLOWED_HOSTS = ['IrisDataClassificationMLModel.azurewebsites.net','127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://IrisDataClassificationMLModel.azurewebsites.net',]
 
 # Application definition
 
@@ -143,7 +143,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-STATICFILES_STORAGE = 'whitenoise.middleware.WhiteNoiseMiddleware'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 EMAIL_HOST = 'smtp.gmail.com'
