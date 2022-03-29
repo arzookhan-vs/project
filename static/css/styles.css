@@ -24,6 +24,14 @@ body {
   }
 }
 
+.footer-text {
+  bottom: 8px;
+  color: black;
+  font-size: 14px;
+  position: absolute;
+  right: 8px;
+}
+
 h4, h5 {
   padding: 6px;
 }
