@@ -2,7 +2,7 @@ from django.conf import settings
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.utils import timezone
+from datetime import datetime
 from demoapp.models import IrisData
 from django.contrib import messages
 from django.core.mail import EmailMultiAlternatives
@@ -61,7 +61,7 @@ def submitData(request):
           petal_length=petalLength,
           petal_width=petalWidth,
           prediction_result=results,
-          date=timezone.now()
+          date_time=datetime.now()
       )
       
       irisData.save()
