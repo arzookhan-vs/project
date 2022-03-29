@@ -20,7 +20,7 @@ IrisModel = joblib.load(filePath)
 def predictIrisFlowerClass(input):
   input = preprocessing.StandardScaler().fit_transform(input)
   output = IrisModel.predict(input)
-  return output[0]
+  return 'Iris ' + output[0]
 
 def index (request):      
   return render(request, 'index.html')
@@ -43,7 +43,7 @@ def submitData(request):
         'petal_length': petalLength,
         'petal_width': petalWidth,
         'result': results,
-        'image': "{% static images/" + results + ".jpg %}"
+        # 'image': "{% static images/" + results + ".jpg %}"
       }
       htmlMessage = render_to_string('emailTemplate.html', data)
       textMessage = strip_tags(htmlMessage)
@@ -68,7 +68,7 @@ def submitData(request):
       irisData.save()
       email.send()
       
-      messages.success(request, 'Submitted successfully!')
+      messages.success(request, 'Result: ' + results)
       
     else:
       messages.warning(request, 'Please fill all fields!')
