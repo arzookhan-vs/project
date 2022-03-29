@@ -37,9 +37,9 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = [
-    'irisdataclassificationmlmodel.azurewebsites.net', 'localhost']
+    'irisdataclassificationmlmodel.azurewebsites.net', 'localhost','127.0.0.1','divyanshuml.azurewebsites.net']
 CSRF_TRUSTED_ORIGINS = [
-    'https://irisdataclassificationmlmodel.azurewebsites.net']
+    'https://irisdataclassificationmlmodel.azurewebsites.net','https://divyanshuml.azurewebsites.net']
 
 # Application definition
 
