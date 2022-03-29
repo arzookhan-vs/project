@@ -18,7 +18,6 @@ filePath = os.path.join(os.path.dirname(
 IrisModel = joblib.load(filePath)
 
 def predictIrisFlowerClass(input):
-  input = preprocessing.StandardScaler().fit_transform(input)
   output = IrisModel.predict(input)
   return 'Iris ' + output[0]
 
