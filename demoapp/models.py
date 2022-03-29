@@ -8,7 +8,7 @@ class IrisData(models.Model):
   petal_length = models.CharField(max_length=10)
   petal_width = models.CharField(max_length=10)
   prediction_result = models.CharField(max_length=121)
-  date = models.DateField()
+  date_time = models.DateTimeField()
   
   def __str__(self):
     return self.email
