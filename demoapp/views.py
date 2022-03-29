@@ -42,7 +42,6 @@ def submitData(request):
         'petal_length': petalLength,
         'petal_width': petalWidth,
         'result': results,
-        # 'image': "{% static images/" + results + ".jpg %}"
       }
       htmlMessage = render_to_string('emailTemplate.html', data)
       textMessage = strip_tags(htmlMessage)
