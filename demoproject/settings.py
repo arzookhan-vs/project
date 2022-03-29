@@ -27,7 +27,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -37,14 +36,10 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-<<<<<<< HEAD
-ALLOWED_HOSTS = ['irisdataclassificationmlmodel.azurewebsites.net', 'localhost']
+ALLOWED_HOSTS = [
+    'irisdataclassificationmlmodel.azurewebsites.net', 'localhost']
 CSRF_TRUSTED_ORIGINS = [
     'https://irisdataclassificationmlmodel.azurewebsites.net']
-=======
-ALLOWED_HOSTS = ['IrisDataClassificationMLModel.azurewebsites.net','127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['https://IrisDataClassificationMLModel.azurewebsites.net',]
->>>>>>> 226cb4f7daf6f568c3cdc009ad14dffe3f929f6c
 
 # Application definition
 
@@ -143,7 +138,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-
 # Added manually
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -151,13 +145,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-<<<<<<< HEAD
-=======
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
->>>>>>> 226cb4f7daf6f568c3cdc009ad14dffe3f929f6c
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
