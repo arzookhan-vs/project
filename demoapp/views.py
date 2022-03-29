@@ -12,6 +12,7 @@ from django.utils.html import strip_tags
 import numpy as np
 import joblib
 import os
+
 filePath = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), 'ml-models/IrisModel.pkl')
 IrisModel = joblib.load(filePath)
@@ -41,13 +42,14 @@ def submitData(request):
         'petal_length': petalLength,
         'petal_width': petalWidth,
         'result': results,
+        'image': 'images/' + results.split()[1] + '.jpg'
       }
       htmlMessage = render_to_string('emailTemplate.html', data)
       textMessage = strip_tags(htmlMessage)
       email = EmailMultiAlternatives(
           "Here's the prediction result",
           textMessage,
-          'IrisData 📨 <' + settings.EMAIL_HOST_USER + '>',
+          'Iris Classification 📨 <' + settings.EMAIL_HOST_USER + '>',
           [emailTo]
       )
       email.attach_alternative(htmlMessage, 'text/html')

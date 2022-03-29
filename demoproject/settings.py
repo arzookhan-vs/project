@@ -37,8 +37,9 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['IrisDataClassificationMLModel.azurewebsites.net']
-CSRF_TRUSTED_ORIGINS = ['https://IrisDataClassificationMLModel.azurewebsites.net']
+ALLOWED_HOSTS = ['irisdataclassificationmlmodel.azurewebsites.net', 'localhost']
+CSRF_TRUSTED_ORIGINS = [
+    'https://irisdataclassificationmlmodel.azurewebsites.net']
 
 # Application definition
 
@@ -139,17 +140,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Added manually
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-
-STATICFILES_STORAGE = 'whitenoise.middleware.WhiteNoiseMiddleware'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
